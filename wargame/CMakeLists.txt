@@ -1,0 +1,1 @@
+add_executable(war main.cxx card.hxx)

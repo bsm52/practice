@@ -34,13 +34,36 @@ enum Suit
     Spades,
 };
 
-struct Card
+class Card
 {
-    Rank rank;
-    Suit suit;
+private:
+  Rank rank;
+  Suit suit;
+public:
+    Card() = default;
+
+    //Construct a card with a rank and suit
+  Card(Rank r, Suit s)
+    :rank(r), suit(s) //member initializer list
+  {}
+
+  //copy constructor
+  Card (const Card& c)
+  : rank(c.rank), suit(c.suit)
+  {}
+
+  // Copy assignment operator
+  Card& operator=(const Card& c)
+  {
+      rank = c.rank;
+      suit = c.suit;
+      return *this;
+  }
+
+  Rank get_rank() const { return rank;}
+  Suit get_suit() const { return suit;}
+
 };
-
-
 
 
 //how to use Cmake
