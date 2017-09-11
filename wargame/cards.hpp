@@ -11,7 +11,7 @@
 
 enum Rank // An enumeration type
 {
-    Ace,  // An enumerator
+    Ace = 1,  // An enumerator
     Two,
     Three,
     Four,
@@ -64,11 +64,3 @@ public:
   Suit get_suit() const { return suit;}
 
 };
-
-
-//how to use Cmake
-//set(CMAKE_CXX_FLAGS "-std=c++14")
-
-//add_executable(war
-   // main.cpp
-    //card.cpp)
