@@ -5,8 +5,24 @@
 #include <vector>
 #include <algorithm> // shuffle function
 #include <random> //random engine
+#include <time.h>
+
+void printdeck (std::vector<Card>(deck))
+{
+   int i = 0;
+   for(Card a : deck) {
+   std::cout << a.get_rank() << a.get_suit() << "  ";
+   i++;
+   if((i % 13) == 0)
+   {
+     std::cout << std::endl;
+     i = 0;
+   }
+  }
+}
 
 using namespace std;
+std::minstd_rand prng;
 
 int main()
 {
@@ -42,24 +58,19 @@ int main()
    }
     cout << "here are the cards in the deck!" << endl;
 
-
-
-   //range base for loop
-   for(Card c : deck) {
-     cout << c.get_rank() << ' ' << c.get_suit() << endl;
-   }
+   printdeck(deck);
 
    cout << endl;
    cout << "here are the cards in the deck after shuffling!" << endl;
-   shuffle(begin(deck), end(deck), default_random_engine());  //shuffle function
 
-   for(Card a : deck) {
-    cout << a.get_rank() << ' ' << a.get_suit() << endl;
-   }
+   prng.seed(time(0));
+   shuffle(begin(deck), end(deck), prng);
+   printdeck(deck);
+
 
    cout << "Now we must make 2 separate decks, one for each player" << endl << endl;
-   std::vector<Card> deck1(26); //The first player's deck
-   std::vector<Card> deck2(26);  // The second Player's deck
+   std::vector<Card> deck1(52); //The first player's deck
+   std::vector<Card> deck2(52);  // The second Player's deck
    for (int a = 0; a <= 25; a++)
    {
        deck1[a] = deck[a];
@@ -70,15 +81,11 @@ int main()
    }
 
    cout << "This is the First Player's deck:" << endl;
-   for(Card a : deck1) {
-   cout << a.get_rank() << ' ' << a.get_suit() << endl;
-   }
+   printdeck(deck1);
    cout << endl;
 
    cout << "This is the second Player's deck:" << endl;
-   for(Card a : deck2) {
-   cout <<  a.get_rank() << ' ' << a.get_suit() << endl;
-   }
+   printdeck(deck2);
 
    return 0;
 }
