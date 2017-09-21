@@ -1,91 +1,72 @@
-//Brandon Meier 3108150
-
-#include <iostream>
-#include "cards.hpp"
-#include <vector>
-#include <algorithm> // shuffle function
-#include <random> //random engine
-#include <time.h>
-
-void printdeck (std::vector<Card>(deck))
-{
-   int i = 0;
-   for(Card a : deck) {
-   std::cout << a.get_rank() << a.get_suit() << "  ";
-   i++;
-   if((i % 13) == 0)
-   {
-     std::cout << std::endl;
-     i = 0;
-   }
-  }
-}
-
-using namespace std;
-std::minstd_rand prng;
 
 int main()
 {
-   /*Rank r1 = Two;
-   Rank r2 = Ace;
-   cout << (r1 == r2) << endl;
-   cout << (r1 < r2) << endl;
-    */
-   //int mn = Jack; //Widening Conversion. Okay.
+    constexpr int runs = 10000;
+    int total = 0;
+    for (int i = 0; i < runs ; ++i)
+    {
+        Game g;
+        total += g.play();
+    }
+    cout << double(total) / double(runs) << endl;
 
-   //Rank r3 = 4; //Narrowing Conversion. Bad. Error's occur
+    if(p1.empty()){
+        if(p2.empty())
+            cout << "Tie\n";
+        else
+            cout << "Player 2 Wins!\n";
+        break;
+    }
+    else if(p2.empty()){
+        cout << "Player 1 Wins\n";
+        break;
+    }
 
-   //Card c1 {Ace, Spades};
-   //Card c2 {Four, Hearts};
+    Deck deck; //game deck unsure how many cards
+    deck.shuffle();
 
-   //Card c;
+    Player p1;
+    Player p2;
 
-   //Declaration invokes a constructor to intialize an object (c3)
-   //Card c3 = c1;
+    //split the deck
+    deal(deck, p1, deck.size() / 2);
+    deal(deck, p2, deck.size());
 
-   //
+    while (!deck.empty()) {
+        deal_one(deck, p1);
+        deal_one(deck, p2);
+    }
 
-    //create a deck of cards.
-   std::vector<Card> deck;
-   deck.reserve(52);
-   for (int r = Ace; r <= King; ++r)
-   {
-       for (int s = Hearts; s <= Spades; ++s)
-       {
-           Card c{static_cast<Rank>(r), static_cast<Suit>(s)}; //static cast changes the type
-           deck.push_back(c);
-       }
-   }
-    cout << "here are the cards in the deck!" << endl;
+    Pile spoils;
 
-   printdeck(deck);
+    while (true) {
 
-   cout << endl;
-   cout << "here are the cards in the deck after shuffling!" << endl;
+        Card c1 = p1.take();
+        Card c2 = p2.take();
 
-   prng.seed(time(0));
-   shuffle(begin(deck), end(deck), prng);
-   printdeck(deck);
+        spoils.add(c1);
+        spoils.add(c2);
+
+        if (c1 > c2){
+            p1.give(c1);
+            p1.give(c2);
+        }
+        else if ( c2 > c1) {
+            p2.give(c2);
+            p2.give(c1);
+        }
+        else{
+            //War
+            spoils.add(p1.take());
+            spoils.add(p2.take());
+            continue;
+        }
+        assert(spoils.empty());
+
+    }
 
 
-   cout << "Now we must make 2 separate decks, one for each player" << endl << endl;
-   std::vector<Card> deck1(52); //The first player's deck
-   std::vector<Card> deck2(52);  // The second Player's deck
-   for (int a = 0; a <= 25; a++)
-   {
-       deck1[a] = deck[a];
-   }
-   for (int i = 26; i <= 51; i++)
-   {
-       deck2[i - 26] = deck[i];
-   }
 
-   cout << "This is the First Player's deck:" << endl;
-   printdeck(deck1);
-   cout << endl;
 
-   cout << "This is the second Player's deck:" << endl;
-   printdeck(deck2);
-
-   return 0;
+    return 0;
 }

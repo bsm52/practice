@@ -2,12 +2,10 @@
 
 //Ranks of a card are:
 //1-13
+//
 
 //Suits of a card are:
 //hearts, diamonds , clubs, spades
-//using Card = int[2]; // a type is a Card which includes two ints
-
-//using Card = std::pair<int, int>;
 
 enum Rank // An enumeration type
 {
@@ -34,6 +32,8 @@ enum Suit
     Spades,
 };
 
+
+//Card Class
 class Card
 {
 private:
@@ -65,8 +65,6 @@ public:
     //mutator functions
   //void set_rank(Rank r) { rank = r;}
   //void set_suit(Suit s) { suit = s;}
-
-
 
 };
 
@@ -149,7 +147,7 @@ std::ostream& operator<<(std::ostream& os, Rank r)
   {
       if (a.get_suit() < b.get_suit())
         return true;
-      if (b.get_suit() < b.get_suit())
+      if (b.get_suit() < a.get_suit())
         return false;
       return a.get_rank() < b.get_rank();
   }
