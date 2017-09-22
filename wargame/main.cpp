@@ -1,6 +1,13 @@
+//Brandon Meier 3108150
+#include <iostream>
+#include <time.h> // used in the prng.seed
+#include "game.hpp"
 
 int main()
 {
+
+    /*
+    extern prng.seed(time(0));
     constexpr int runs = 10000;
     int total = 0;
     for (int i = 0; i < runs ; ++i)
@@ -62,6 +69,7 @@ int main()
             continue;
         }
         assert(spoils.empty());
+        */
 
     }
 

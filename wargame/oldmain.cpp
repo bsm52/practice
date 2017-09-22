@@ -63,7 +63,7 @@ int main()
    cout << endl;
    cout << "here are the cards in the deck after shuffling!" << endl;
 
-   prng.seed(time(0));
+   global prng.seed(time(0));
    shuffle(begin(deck), end(deck), prng);
    printdeck(deck);
 
