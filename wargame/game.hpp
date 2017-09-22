@@ -1,6 +1,9 @@
 #include <iostream>
 #include <deck.hpp>
 #include <deque>
+#include <vector>
+
+using Hand=std::deque<Card>;
 
 struct Game
 {
@@ -9,7 +12,7 @@ struct Game
     Player p1;
     Player p2;
     Pile pile;
-    int turns;
+    int turns = 0;
 };
 
 struct Options
@@ -23,10 +26,24 @@ struct Options
 class Player
 {
 public:
-    std::deque<Card> hand; //creates a deque of cards to make the hand
-    hand deal(Deck);  //
-
+    std::deque<Card> hand = 0; //creates a deque of cards to make the hand
+    Card take();  //plays the card
+    void give(Card);  //receives the card
 };
+
+void deal(Deck& d, Player p, int size); //deal function to split the deck between the players
+
+class Pile
+{
+    public:
+        std::vector<Card>lot;
+        Pile();
+        void add(Card);
+};
+
+
+
+
 
 
 

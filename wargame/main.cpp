@@ -16,6 +16,7 @@ int main()
         total += g.play();
     }
     cout << double(total) / double(runs) << endl;
+    */
 
     if(p1.empty()){
         if(p2.empty())
@@ -37,7 +38,7 @@ int main()
 
     //split the deck
     deal(deck, p1, deck.size() / 2);
-    deal(deck, p2, deck.size());
+    deal(deck, p2, deck.size() / 2);
 
     while (!deck.empty()) {
         deal_one(deck, p1);
@@ -68,8 +69,8 @@ int main()
             spoils.add(p2.take());
             continue;
         }
-        assert(spoils.empty());
-        */
+
+
 
     }
 
