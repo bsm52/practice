@@ -3,6 +3,8 @@
 #include <time.h> // used in the prng.seed
 #include "game.hpp"
 
+using namespace std;
+
 int main()
 {
 
@@ -16,34 +18,20 @@ int main()
         total += g.play();
     }
     cout << double(total) / double(runs) << endl;
+
+
+
     */
 
-    if(p1.empty()){
-        if(p2.empty())
-            cout << "Tie\n";
-        else
-            cout << "Player 2 Wins!\n";
-        break;
-    }
-    else if(p2.empty()){
-        cout << "Player 1 Wins\n";
-        break;
-    }
-
-    Deck deck; //game deck unsure how many cards
-    deck.shuffle();
+    Deck deck; //game deck. Used to split amongst the players
+    shuffle(deck);  //self explanatory
 
     Player p1;
     Player p2;
 
     //split the deck
-    deal(deck, p1, deck.size() / 2);
+    deal(deck, p1, deck.size() / 2);  //each player will fill his/her hand with cards from the deck
     deal(deck, p2, deck.size() / 2);
-
-    while (!deck.empty()) {
-        deal_one(deck, p1);
-        deal_one(deck, p2);
-    }
 
     Pile spoils;
 
@@ -68,6 +56,18 @@ int main()
             spoils.add(p1.take());
             spoils.add(p2.take());
             continue;
+        }
+
+        if(p1.empty()){
+            if(p2.empty())
+                cout << "Tie\n";
+            else
+                cout << "Player 2 Wins!\n";
+            break;
+        }
+        else if(p2.empty()){
+            cout << "Player 1 Wins\n";
+            break;
         }
 
 

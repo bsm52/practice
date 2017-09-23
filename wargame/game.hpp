@@ -1,21 +1,14 @@
+#ifndef GAME_HPP
+#define GAME_HPP
 #include <iostream>
-#include <deck.hpp>
+#include "deck.hpp"
 #include <deque>
 #include <vector>
 
 using Hand=std::deque<Card>;
 
-struct Game
-{
-    Options options;
-    Deck deck = make_standard_deck();
-    Player p1;
-    Player p2;
-    Pile pile;
-    int turns = 0;
-};
 
-struct Options
+struct Options  //Game options that can be configured by the user
 {
     int num_decks = 1;
     bool ace_high = true;
@@ -23,10 +16,10 @@ struct Options
     bool negotiable = true;
 };
 
-class Player
+class Player  //The player class which holds the "hand"
 {
 public:
-    std::deque<Card> hand = 0; //creates a deque of cards to make the hand
+    std::deque<Card> hand; //creates a deque of cards to make the hand
     Card take();  //plays the card
     void give(Card);  //receives the card
 };
@@ -41,9 +34,18 @@ class Pile
         void add(Card);
 };
 
+struct Game
+{
+    Options options;
+    Deck deck = make_standard_deck();
+    Player p1;
+    Player p2;
+    Pile pile;
+    int turns = 0;
+};
 
 
 
-
+#endif // GAME_HPP
 
 
