@@ -22,6 +22,7 @@ public:
     std::deque<Card> hand; //creates a deque of cards to make the hand
     Card take();  //plays the card
     void give(Card);  //receives the card
+    bool empty();
 };
 
 void deal(Deck& d, Player p, int size); //deal function to split the deck between the players
@@ -30,11 +31,10 @@ class Pile
 {
     public:
         std::vector<Card>lot;
-        Pile();
         void add(Card);
 };
 
-struct Game
+/*struct Game
 {
     Options options;
     Deck deck = make_standard_deck();
@@ -43,6 +43,7 @@ struct Game
     Pile pile;
     int turns = 0;
 };
+*/
 
 
 
