@@ -1,12 +1,17 @@
+#ifndef DECK_CPP
+#define DECK_CPP
 #include <iostream>
 #include <algorithm> // shuffle function
 #include "deck.hpp"
+#include <random>
+#include <time.h>
 
-std::minstd_rand prng; //pseudo random number generator
 
 
 void printdeck (Deck deck)
 {
+   if(deck.empty())
+    std::cout << "The deck is empty" << std::endl;
    int i = 0;
    for(Card a : deck) {
    std::cout << a.get_rank() << a.get_suit() << "  ";
@@ -19,8 +24,10 @@ void printdeck (Deck deck)
   }
 }
 
+
 void shuffle(Deck& d){
-    shuffle(begin(d), end(d), prng);
+    unsigned seed = time(0);
+    std::shuffle(begin(d), end(d), std::default_random_engine(seed));
 }
 
 Deck make_standard_deck() //Makes the deck!
@@ -35,11 +42,15 @@ Deck make_standard_deck() //Makes the deck!
            deck.push_back(c);
        }
    }
+   return deck;
 }
 
 void sortdeck(Deck &deck) //sorts the deck!
 {
     sort(deck.begin(), deck.end());
 }
+
+
+#endif // DECK_CPP
 
 

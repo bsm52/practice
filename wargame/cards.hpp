@@ -1,4 +1,7 @@
+#ifndef CARDS_HPP
+#define CARDS_HPP
 #include <utility>
+
 
 //Ranks of a card are:
 //1-13
@@ -68,7 +71,7 @@ public:
 
 };
 
-std::ostream& operator<<(std::ostream& os, Rank r)
+inline std::ostream& operator<<(std::ostream& os, Rank r)
 {
     switch (r){
     case Ace:
@@ -110,11 +113,12 @@ std::ostream& operator<<(std::ostream& os, Rank r)
     case King:
         os << 'K';
             break;
+    }
 
         return os;
-    }
+
 }
-  std::ostream& operator <<(std::ostream& os, Suit s)
+  inline std::ostream& operator <<(std::ostream& os, Suit s)
   {
     switch (s) {
         case Hearts:
@@ -133,28 +137,32 @@ std::ostream& operator<<(std::ostream& os, Rank r)
       return os;
   }
 
-  bool operator==(Card a, Card b)
+  inline bool operator==(Card a, Card b)
   {
       return a.get_rank() == b.get_rank() && a.get_suit() == b.get_suit();
   }
-  bool operator!=(Card a, Card b)
+  inline bool operator!=(Card a, Card b)
   {
       return !(a == b);
   }
 
   //ordering
-  bool operator <(Card a, Card b)
+  inline bool operator <(Card a, Card b)
   {
-      if (a.get_suit() < b.get_suit())
+      if (a.get_rank() < b.get_rank())
         return true;
-      if (b.get_suit() < a.get_suit())
+      else
         return false;
-      return a.get_rank() < b.get_rank();
   }
-  bool operator >(Card a, Card b)
+   inline bool operator >(Card a, Card b)
   {
-
+      if (a.get_rank() > b.get_rank())
+        return true;
+      else
+        return false;
   }
+  /*
   bool operator <=(Card a, Card b){}
   bool operator >=(Card a, Card b){}
-
+  */
+#endif // CARDS_HPP
