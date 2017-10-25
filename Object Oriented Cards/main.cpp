@@ -1,11 +1,13 @@
 #include <iostream>
-#include "deck.cpp"
+#include "deck.hpp"
 using namespace std;
 
 
 int main()
 {
-    Card card(1, Two, Hearts);
+    Suited card(1, Two, Hearts);
+    Deck deck = make_std_deck();
+    cout << deck[1]->id << endl;
     cout << "Hello world!" << endl;
     return 0;
 }
