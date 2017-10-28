@@ -2,12 +2,16 @@
 #define DECK_CPP
 
 #include "deck.hpp"
+#include <iostream>
+#include <random>
+#include <algorithm>
 
 
 
 Deck make_std_deck()
 {
     Deck d;
+    d.reserve(54);
 
     Suited c1{1, Ace, Spades};
     Suited c2{2, Two, Spades};
@@ -121,11 +125,27 @@ Deck make_std_deck()
     Joker j1(53, Black);
     Joker j2(54, Red);
 
-    d.push_back(&j1);
-    d.push_back(&j2);
+   // d.push_back(&j1);
+    //d.push_back(&j2);
 
   return d;
 
+}
+
+
+void printdeck(Deck d)
+{
+    for(int i = 0; i < d.size(); i++)
+    {
+        Suited* s = static_cast<Suited*>(d[i]);
+        std::cout << s->suit << '  ' << s->rank << std::endl;
+    }
+
+}
+
+void shuffle_deck(Deck d)
+{
+    random_shuffle(d.begin(), d.end());
 }
 
 
