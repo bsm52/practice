@@ -11,7 +11,7 @@
 Deck make_std_deck()
 {
     Deck d;
-    d.reserve(54);
+    d.reserve(1);
 
     Suited c1{1, Ace, Spades};
     Suited c2{2, Two, Spades};
@@ -69,7 +69,7 @@ Deck make_std_deck()
     Suited c51{51, Queen, Diamonds};
     Suited c52{52, King, Diamonds};
 
-    d.push_back(&c1);
+    d.push_back(c1);
     d.push_back(&c2);
     d.push_back(&c3);
     d.push_back(&c4);
@@ -125,8 +125,8 @@ Deck make_std_deck()
     Joker j1(53, Black);
     Joker j2(54, Red);
 
-   // d.push_back(&j1);
-    //d.push_back(&j2);
+    d.push_back(&j1);
+    d.push_back(&j2);
 
   return d;
 
